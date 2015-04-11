@@ -18,12 +18,19 @@ class IndexController extends Yaf_Controller_Abstract {
 
 		//2. fetch model
 		$model = new SampleModel();
-
+                   
 		//3. assign
 		$this->getView()->assign("content", $model->selectSample());
 		$this->getView()->assign("name", $name);
-
+                $this->getView()->assign("redis",$this->testRedis());
 		//4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
         return TRUE;
 	}
+     private function testRedis(){
+        $redis = new Redis();
+	$redis->connect('127.0.0.1',6379);
+    	$redis->set('test','hello world!');
+	return  $redis->get('test');
+ 
+      }
 }
