@@ -27,10 +27,11 @@ class IndexController extends Yaf_Controller_Abstract {
         return TRUE;
 	}
      private function testRedis(){
-        $redis = new Redis();
-	$redis->connect('127.0.0.1',6379);
+        
+		$redis = new Redis();
+		$redis->connect('127.0.0.1',6379);
     	$redis->set('test','hello world!');
-	return  $redis->get('test');
+		return  $redis->get('test');
  
       }
 }
